@@ -61,3 +61,18 @@ The project follows a MVC architecture pattern with clear separation of concerns
 - Validation methods for box count limits
 - Animation sequence management
 - State preservation during count changes
+
+## Screenshots
+
+Here are some screenshots demonstrating the app's functionality:
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="screenshots/initial_state.svg" width="30%" alt="Initial State">
+  <img src="screenshots/partially_tapped.svg" width="30%" alt="Partially Tapped State">
+  <img src="screenshots/completion_state.svg" width="30%" alt="Completion State">
+</div>
+
+The screenshots show:
+1. Initial state with untapped red boxes
+2. Partially tapped state with some green boxes
+3. Completion state with congratulations message
