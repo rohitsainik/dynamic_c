@@ -83,7 +83,7 @@ class HomePage extends GetView<HomePageController> {
                         return Padding(
                           padding: const EdgeInsets.only(right: 8),
                           child: boxes[
-                              controller.numberOfBoxes.value - bottomCount + i],
+                          controller.numberOfBoxes.value - bottomCount + i],
                         );
                       }),
                     ),
@@ -131,23 +131,41 @@ class HomePage extends GetView<HomePageController> {
                         size: 30, color: Colors.red),
                   ),
                   const SizedBox(width: 16),
-                  Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-                    decoration: BoxDecoration(
-                      color: Colors.blue.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Obx(() {
-                      return Text(
-                        '${controller.numberOfBoxes.value}',
-                        style: const TextStyle(
+                  Obx(() {
+                    return Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: Colors.blue.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      width: 100,
+                      child: TextField(
+                        controller: controller.inputController,
+                        textAlign: TextAlign.center,
+                        keyboardType: TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                          LengthLimitingTextInputFormatter(2),
+                        ],
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: '${controller.numberOfBoxes.value}',
+                          hintStyle: const TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
-                            color: Colors.blue),
-                      );
-                    }),
-                  ),
+                            color: Colors.blue,
+                          ),
+                        ),
+                        style: const TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blue,
+                        ),
+                        onSubmitted: controller.onSubmitted,
+                      ),
+                    );
+                  }),
                   const SizedBox(width: 16),
                   IconButton(
                     onPressed: controller.incrementBoxes,
@@ -162,7 +180,9 @@ class HomePage extends GetView<HomePageController> {
         const SizedBox(height: 16),
         Obx(() {
           final tappedCount =
-              controller.boxStates.where((state) => state).length;
+              controller.boxStates
+                  .where((state) => state)
+                  .length;
           final totalBoxes = controller.numberOfBoxes.value;
           return Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -225,7 +245,7 @@ class HomePage extends GetView<HomePageController> {
                     duration: const Duration(milliseconds: 200),
                     opacity: value,
                     child:
-                        const Icon(Icons.check, color: Colors.white, size: 24),
+                    const Icon(Icons.check, color: Colors.white, size: 24),
                   ),
                 ),
               ),

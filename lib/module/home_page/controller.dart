@@ -22,13 +22,11 @@ class HomePageController extends GetxController {
     if (n >= 5 && n <= 25) {
       final currentStates = List<bool>.from(boxStates);
       if (n > currentStates.length) {
-
         boxStates.value = [
           ...currentStates,
           ...List.generate(n - currentStates.length, (_) => false)
         ];
       } else if (n < currentStates.length) {
-
         boxStates.value = currentStates.sublist(0, n);
       }
       topRowCount.value = (n / 3).ceil();
@@ -100,6 +98,25 @@ class HomePageController extends GetxController {
         isAnimating.value = false;
       }
     });
+  }
+
+  void Function(String)? onSubmitted(value) {
+    final number = int.tryParse(value);
+    if (number != null && number >= 5 && number <= 25) {
+      numberOfBoxes.value = number;
+      inputController.clear();
+      numberOfBoxes.refresh();
+    } else {
+      Get.snackbar(
+        'Invalid Input',
+        'Please enter a number between 5 and 25',
+        backgroundColor: Colors.red.shade50,
+        colorText: Colors.red,
+        snackPosition: SnackPosition.TOP,
+      );
+      inputController.clear();
+    }
+    return null;
   }
 
   @override
